@@ -15,11 +15,11 @@ func New() *echo.Echo {
 	e.GET("users", c.GetUsersController)
 	e.GET("/users/:id", c.GetUserController)
 	e.POST("users", c.CreateUserController)
-	e.DELETE("/users/:id", c.DeleteUserController)
-	e.PUT("/users/:id", c.UpdateUserController)
+	// e.DELETE("/users/:id", c.DeleteUserController)
+	// e.PUT("/users/:id", c.UpdateUserController)
 
-	eUser := e.Group("users/")
-	eUser.Use(echoMid.BasicAuth(m.BasicAuthDB))
+	eUser := e.Group("/users/")
+	eUser.Use(echoMid.BasicAuth(m.BasicAuth))
 	eUser.PUT(":id", c.UpdateUserController)
 	eUser.DELETE(":id", c.DeleteUserController)
 
