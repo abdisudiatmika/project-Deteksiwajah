@@ -29,7 +29,7 @@ func CreateUserController(c echo.Context) error {
 	user := models.Usereye{}
 
 	c.Bind(&user)
-	result, err := database.CreateUser(&user)
+	result, err := database.CreateUsereye(&user)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}

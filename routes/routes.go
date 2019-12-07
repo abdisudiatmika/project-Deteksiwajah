@@ -1,8 +1,8 @@
 package routes
 
 import (
-	c "go-training-restful/controllers"
-	m "go-training-restful/middleware"
+	c "project-Deteksiwajah/controllers"
+	m "project-Deteksiwajah/middleware"
 
 	"github.com/labstack/echo"
 )
@@ -11,11 +11,12 @@ import (
 func New() *echo.Echo {
 	e := echo.New()
 	m.LogMiddleware(e)
-	e.GET("users", c.GetUsersController)
-	e.GET("/users/:id", c.GetUserController)
-	e.POST("users", c.CreateUserController)
-	e.DELETE("/users/:id", c.DeleteUserController)
-	e.PUT("/users/:id", c.UpdateUserController)
+	e.POST("userseye", c.CreateUserController)
+
+	// e.GET("users", c.GetUsersController)
+	// e.GET("/users/:id", c.GetUserController)
+	// e.DELETE("/users/:id", c.DeleteUserController)
+	// e.PUT("/users/:id", c.UpdateUserController)
 
 	// eUser := e.Group("/users/")
 	// eUser.Use(echoMid.BasicAuth(m.BasicAuth))

@@ -18,13 +18,13 @@ func GetUsers() (interface{}, error) {
 	return users, nil
 }
 
-//CreateUser function menambah user
-func CreateUser(user *models.Usereye) (interface{}, error) {
+//CreateUsereye function menambah user
+func CreateUsereye(usereye *models.Usereye) (interface{}, error) {
 
-	if err := db.Save(&user).Error; err != nil {
+	if err := db.Save(&usereye).Error; err != nil {
 		return nil, err
 	}
-	return user, nil
+	return usereye, nil
 }
 
 //GetUserByID function mengambil data user
