@@ -10,6 +10,9 @@ import (
 func New() *echo.Echo {
 	e := echo.New()
 
-	e.GET("/users", c.GetUsersController)
+	e.GET("users", c.GetUsersController)
+
+	e.POST("users", c.CreateUserController)
+
 	return e
 }
