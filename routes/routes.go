@@ -5,7 +5,6 @@ import (
 	m "go-training-restful/middleware"
 
 	"github.com/labstack/echo"
-	echoMid "github.com/labstack/echo/middleware"
 )
 
 //New fungsi baru untuk routing
@@ -15,13 +14,13 @@ func New() *echo.Echo {
 	e.GET("users", c.GetUsersController)
 	e.GET("/users/:id", c.GetUserController)
 	e.POST("users", c.CreateUserController)
-	// e.DELETE("/users/:id", c.DeleteUserController)
-	// e.PUT("/users/:id", c.UpdateUserController)
+	e.DELETE("/users/:id", c.DeleteUserController)
+	e.PUT("/users/:id", c.UpdateUserController)
 
-	eUser := e.Group("/users/")
-	eUser.Use(echoMid.BasicAuth(m.BasicAuth))
-	eUser.PUT(":id", c.UpdateUserController)
-	eUser.DELETE(":id", c.DeleteUserController)
+	// eUser := e.Group("/users/")
+	// eUser.Use(echoMid.BasicAuth(m.BasicAuth))
+	// eUser.PUT(":id", c.UpdateUserController)
+	// eUser.DELETE(":id", c.DeleteUserController)
 
 	return e
 
