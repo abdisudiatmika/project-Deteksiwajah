@@ -4,8 +4,8 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-//Personal Struck simpen data user
-type Personal struct {
+//Usereye Struck simpen data user
+type Usereye struct {
 	gorm.Model
 
 	Jarak    string `json:"jarak" json:"jarak" query:"jarak"`

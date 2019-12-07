@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"go-training-restful/database"
-	"go-training-restful/models"
 	"net/http"
+	"project-Deteksiwajah/database"
+	"project-Deteksiwajah/models"
 	"strconv"
 
 	"github.com/labstack/echo"
@@ -26,7 +26,7 @@ func GetUsersController(c echo.Context) error {
 
 //CreateUserController function menambah user
 func CreateUserController(c echo.Context) error {
-	user := models.User{}
+	user := models.Usereye{}
 
 	c.Bind(&user)
 	result, err := database.CreateUser(&user)
@@ -59,7 +59,7 @@ func GetUserController(c echo.Context) error {
 func UpdateUserController(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 
-	user := models.User{}
+	user := models.Usereye{}
 	newUser := user
 	c.Bind(&newUser)
 
@@ -80,7 +80,7 @@ func UpdateUserController(c echo.Context) error {
 
 //DeleteUserController haous data
 func DeleteUserController(c echo.Context) error {
-	user := models.User{}
+	user := models.Usereye{}
 	c.Bind(&user)
 
 	id, _ := strconv.Atoi(c.Param("id"))

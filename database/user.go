@@ -1,15 +1,15 @@
 package database
 
 import (
-	"go-training-restful/config"
-	"go-training-restful/models"
+	"project-Deteksiwajah/config"
+	"project-Deteksiwajah/models"
 )
 
 var db = config.DB
 
 //GetUsers function mengambil data user
 func GetUsers() (interface{}, error) {
-	var users []models.User
+	var users []models.Usereye
 	//DB.Find(&users) select all from users
 
 	if err := db.Find(&users).Error; err != nil {
@@ -19,7 +19,7 @@ func GetUsers() (interface{}, error) {
 }
 
 //CreateUser function menambah user
-func CreateUser(user *models.User) (interface{}, error) {
+func CreateUser(user *models.Usereye) (interface{}, error) {
 
 	if err := db.Save(&user).Error; err != nil {
 		return nil, err
@@ -29,7 +29,7 @@ func CreateUser(user *models.User) (interface{}, error) {
 
 //GetUserByID function mengambil data user
 func GetUserByID(id int) (interface{}, error) {
-	var users models.User
+	var users models.Usereye
 	if err := db.First(&users, id).Error; err != nil {
 		return nil, err
 	}
@@ -37,8 +37,8 @@ func GetUserByID(id int) (interface{}, error) {
 }
 
 //UpdateUserByID fungstion update dengan id
-func UpdateUserByID(id int, newUser *models.User) (interface{}, error) {
-	var users models.User
+func UpdateUserByID(id int, newUser *models.Usereye) (interface{}, error) {
+	var users models.Usereye
 
 	if err := db.Where("ID = ?", id).Find(&users).Error; err != nil {
 		return nil, err
@@ -52,7 +52,7 @@ func UpdateUserByID(id int, newUser *models.User) (interface{}, error) {
 
 //DeleteUser hapus data
 func DeleteUser(id int) (interface{}, error) {
-	var users models.User
+	var users models.Usereye
 
 	if err := db.Where("ID = ?", id).Find(&users).Error; err != nil {
 		return nil, err
