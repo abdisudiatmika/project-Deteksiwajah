@@ -4,6 +4,7 @@ import (
 	"go-training-restful/database"
 	"go-training-restful/models"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo"
 )
@@ -33,4 +34,22 @@ func CreateUserController(c echo.Context) error {
 	}
 	return c.JSON(http.StatusCreated, result)
 
+}
+
+//GetUserController function mengambil data user
+func GetUserController(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	result, err := database.GetUserByID(id)
+
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"code":    http.StatusOK,
+		"status":  true,
+		"massage": "mendapatkan data",
+		"data":    result,
+	})
 }

@@ -26,3 +26,12 @@ func CreateUser(user *models.User) (interface{}, error) {
 	}
 	return user, nil
 }
+
+//GetUserByID function mengambil data user
+func GetUserByID(id int) (interface{}, error) {
+	var users models.User
+	if err := db.First(&users, id).Error; err != nil {
+		return nil, err
+	}
+	return users, nil
+}
