@@ -17,3 +17,12 @@ func GetUsers() (interface{}, error) {
 	}
 	return users, nil
 }
+
+//CreateUser function menambah user
+func CreateUser(user *models.User) (interface{}, error) {
+
+	if err := db.Save(&user).Error; err != nil {
+		return nil, err
+	}
+	return user, nil
+}

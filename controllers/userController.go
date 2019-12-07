@@ -1,15 +1,12 @@
 package controllers
 
 import (
-	"go-training-restful/config"
 	"go-training-restful/database"
 	"go-training-restful/models"
 	"net/http"
 
 	"github.com/labstack/echo"
 )
-
-var db = config.DB
 
 //GetUsersController function mengambil data user
 func GetUsersController(c echo.Context) error {
@@ -27,9 +24,13 @@ func GetUsersController(c echo.Context) error {
 }
 
 //CreateUserController function menambah user
-func CreateUserController(user *models.User) (interface{}, error) {
-	if err := db.Create(&user).Error; err != nil {
-		return nil, err
+func CreateUserController(c echo.Context) error {
+	user := models.User{}
+	c.Bind(&user)
+	result, err := database.CreateUser(&user)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
-	return user, nil
+	return c.JSON(http.StatusCreated, result)
+
 }
