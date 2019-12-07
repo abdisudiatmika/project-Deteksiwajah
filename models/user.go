@@ -4,11 +4,11 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-//User Struck simpen data user
-type User struct {
+//Personal Struck simpen data user
+type Personal struct {
 	gorm.Model
 
-	Email    string `json:"email" json:"email" query:"email"`
-	Name     string `json:"name" json:"name" query:"name"`
-	Password string `json:"password" json:"password" query:"password"`
+	Jarak    string `json:"jarak" json:"jarak" query:"jarak"`
+	Personal string `json:"personal" json:"personal" query:"personal"`
+	//Password string `json:"password" json:"password" query:"password"`
 }

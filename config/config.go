@@ -32,7 +32,7 @@ func initDB() {
 		DBPassword: "",
 		DBPort:     "3306",
 		DBHost:     "localhost",
-		DBName:     "dbmvc",
+		DBName:     "dbtest",
 	}
 
 	connectionString :=
