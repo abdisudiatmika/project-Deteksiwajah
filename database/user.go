@@ -35,3 +35,31 @@ func GetUserByID(id int) (interface{}, error) {
 	}
 	return users, nil
 }
+
+//UpdateUserByID fungstion update dengan id
+func UpdateUserByID(id int, newUser *models.User) (interface{}, error) {
+	var users models.User
+
+	if err := db.Where("ID = ?", id).Find(&users).Error; err != nil {
+		return nil, err
+	}
+	if err := db.Save(&newUser).Error; err != nil {
+		return nil, err
+	}
+	return newUser, nil
+
+}
+
+//DeleteUser hapus data
+func DeleteUser(id int) (interface{}, error) {
+	var users models.User
+
+	if err := db.Where("ID = ?", id).Find(&users).Error; err != nil {
+		return nil, err
+	}
+	if err := db.Delete(&users).Error; err != nil {
+		return nil, err
+	}
+	return users, nil
+
+}
