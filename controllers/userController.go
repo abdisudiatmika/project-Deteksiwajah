@@ -12,9 +12,9 @@ import (
 	"github.com/labstack/echo"
 )
 
-//GetUsersController function mengambil data user
-func GetUsersController(c echo.Context) error {
-	users, err := database.GetUsers()
+//GetUsersdbController function mengambil data user
+func GetUsersdbController(c echo.Context) error {
+	users, err := database.Geteyedb()
 
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
@@ -27,12 +27,12 @@ func GetUsersController(c echo.Context) error {
 	})
 }
 
-//CreateUserController function menambah user
-func CreateUserController(c echo.Context) error {
+//CreatedbUsereyeController function menambah user
+func CreatedbUsereyeController(c echo.Context) error {
 	user := models.Usereye{}
 
 	c.Bind(&user)
-	result, err := database.CreateUsereye(&user)
+	result, err := database.CreatedbUsereye(&user)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -40,11 +40,11 @@ func CreateUserController(c echo.Context) error {
 
 }
 
-//GetUserController function mengambil data user
-func GetUserController(c echo.Context) error {
+//GeteyedbbyidController function mengambil data user
+func GeteyedbbyidController(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 
-	result, err := database.GetUserByID(id)
+	result, err := database.Geteyedbbyid(id)
 
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
@@ -58,15 +58,15 @@ func GetUserController(c echo.Context) error {
 	})
 }
 
-// UpdateUserController Update by id
-func UpdateUserController(c echo.Context) error {
+// UpdateeyedbController Update by id
+func UpdateeyedbController(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 
 	user := models.Usereye{}
 	newUser := user
 	c.Bind(&newUser)
 
-	result, err := database.UpdateUserByID(id, &newUser)
+	result, err := database.Updateeyedb(id, &newUser)
 
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
@@ -81,13 +81,13 @@ func UpdateUserController(c echo.Context) error {
 
 }
 
-//DeleteUserController haous data
-func DeleteUserController(c echo.Context) error {
+//DeleteeyedbController haous data
+func DeleteeyedbController(c echo.Context) error {
 	user := models.Usereye{}
 	c.Bind(&user)
 
 	id, _ := strconv.Atoi(c.Param("id"))
-	result, err := database.DeleteUser(id)
+	result, err := database.Deleteeyedb(id)
 
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
@@ -137,17 +137,21 @@ func GetFacePersonal(c echo.Context) error {
 
 	jarak := Getdataface()
 
-	result, err := database.FindPersonal(jarak)
+	resultkey, resultpersonal, err := database.FindPersonal(jarak)
 
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
-	fmt.Println(result)
+	//fmt.Println(personal)
+	var personal models.Personality
+	personal.UserPersonality = resultpersonal
+	fmt.Println(personal)
+
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"code":    http.StatusOK,
 		"status":  true,
 		"massage": "mendapatkan data",
-		"data":    GetQutes(result),
+		"data":    GetQutes(resultkey, resultpersonal),
 	})
 
 }

@@ -9,6 +9,6 @@ type Usereye struct {
 	gorm.Model
 
 	Jarak    int    `json:"jarak" json:"jarak" query:"jarak"`
+	Keyword  string `json:"keyword" json:"keyword" query:"keyword"`
 	Personal string `json:"personal" json:"personal" query:"personal"`
-	//Password string `json:"password" json:"password" query:"password"`
 }

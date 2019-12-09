@@ -3,7 +3,6 @@ package controllers
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"mime/multipart"
@@ -80,20 +79,41 @@ func Getdataface() int {
 
 	json.NewDecoder(response.Body).Decode(&NewFaceWithLandmarks)
 
-	fmt.Println(NewFaceWithLandmarks.Faces[0].LeftEye[0].X)
+	// fmt.Println(NewFaceWithLandmarks.Faces[0].LeftEye[0].X)
 
-	fmt.Println(NewFaceWithLandmarks.Faces[0].RightEye[0].X)
-	matakiri := (NewFaceWithLandmarks.Faces[0].LeftEye[0].X)
-	matakanan := (NewFaceWithLandmarks.Faces[0].RightEye[0].X)
-	jarak := matakanan - matakiri
-	fmt.Println(jarak)
+	var Jumlahka, Jumlahki int
+	for _, value := range NewFaceWithLandmarks.Faces[0].LeftEye {
+
+		Jumlahka += value.X
+	}
+
+	for _, value := range NewFaceWithLandmarks.Faces[0].RightEye {
+
+		Jumlahki += value.X
+	}
+
+	ratakiri := Jumlahka / 6
+	ratakanan := Jumlahki / 6
+	jarak := ratakanan - ratakiri
+	if jarak > 300 {
+		jarak = 300
+	} else if jarak > 200 {
+
+		jarak = 200
+	} else if jarak > 100 {
+
+		jarak = 100
+	} else {
+		jarak = 0
+	}
 	return jarak
 }
 
 //GetQutes untuk mengambil Qutes
-func GetQutes(kata string) models.Personality {
+func GetQutes(keyword, personvalue string) models.Personality {
+
 	var requestBody bytes.Buffer
-	req, _ := http.NewRequest("GET", "https://quote-garden.herokuapp.com/quotes/search/"+kata, &requestBody)
+	req, _ := http.NewRequest("GET", "https://quote-garden.herokuapp.com/quotes/search/"+keyword, &requestBody)
 
 	//responseData, _ := ioutil.ReadAll(response.Body)
 	//defer response.Body.Close()
@@ -109,9 +129,10 @@ func GetQutes(kata string) models.Personality {
 
 	hasil := (NewQutes.Results[0].QuoteText)
 	var personal models.Personality
-	personal.UserPersobality = kata
+
+	personal.UserPersonality = personvalue
 	personal.UserQutes = hasil
-	fmt.Println(personal)
+
 	return personal
 
 }

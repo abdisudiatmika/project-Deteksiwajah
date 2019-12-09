@@ -1,6 +1,7 @@
 package models
 
+//Personality memunculkan pernolayty dan qutes
 type Personality struct {
-	UserPersobality string `json:"userPersobality"`
+	UserPersonality string `json:"userPersonality"`
 	UserQutes       string `json:"userQutes"`
 }

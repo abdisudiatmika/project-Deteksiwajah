@@ -8,10 +8,9 @@ import (
 
 var db = config.DB
 
-//GetUsers function mengambil data user
-func GetUsers() (interface{}, error) {
+//Geteyedb function mengambil data ketreangan mata
+func Geteyedb() (interface{}, error) {
 	var users []models.Usereye
-	//DB.Find(&users) select all from users
 
 	if err := db.Find(&users).Error; err != nil {
 		return nil, err
@@ -19,8 +18,8 @@ func GetUsers() (interface{}, error) {
 	return users, nil
 }
 
-//CreateUsereye function menambah user
-func CreateUsereye(usereye *models.Usereye) (interface{}, error) {
+//CreatedbUsereye function menambah keterangan mata
+func CreatedbUsereye(usereye *models.Usereye) (interface{}, error) {
 
 	if err := db.Save(&usereye).Error; err != nil {
 		return nil, err
@@ -29,7 +28,7 @@ func CreateUsereye(usereye *models.Usereye) (interface{}, error) {
 }
 
 //FindPersonal fungsi mencari data
-func FindPersonal(jarak int) (string, error) {
+func FindPersonal(jarak int) (string, string, error) {
 	var users models.Usereye
 
 	//jarak = 813
@@ -37,15 +36,15 @@ func FindPersonal(jarak int) (string, error) {
 	//if err := db.Find(&users, jarak).Error; err != nil {
 	if err := db.Where("jarak LIKE ?", "%"+strconv.Itoa(jarak)+"%").Find(&users).Error; err != nil {
 		//if err := db.First(&users).Error; err != nil {
-		return "", err
+		return "", "", err
 	}
 	//fmt.Println(users)
-	return users.Personal, nil
+	return users.Keyword, users.Personal, nil
 
 }
 
-//GetUserByID function mengambil data user
-func GetUserByID(id int) (interface{}, error) {
+//Geteyedbbyid function mengambil keterangan mata dengan id
+func Geteyedbbyid(id int) (interface{}, error) {
 	var users models.Usereye
 	if err := db.First(&users, id).Error; err != nil {
 		return nil, err
@@ -53,8 +52,8 @@ func GetUserByID(id int) (interface{}, error) {
 	return users, nil
 }
 
-//UpdateUserByID fungstion update dengan id
-func UpdateUserByID(id int, newUser *models.Usereye) (interface{}, error) {
+//Updateeyedb fungstion update keretangan mata dengan id
+func Updateeyedb(id int, newUser *models.Usereye) (interface{}, error) {
 	var users models.Usereye
 
 	if err := db.Where("ID = ?", id).Find(&users).Error; err != nil {
@@ -67,8 +66,8 @@ func UpdateUserByID(id int, newUser *models.Usereye) (interface{}, error) {
 
 }
 
-//DeleteUser hapus data
-func DeleteUser(id int) (interface{}, error) {
+//Deleteeyedb hapus data keterangan mata
+func Deleteeyedb(id int) (interface{}, error) {
 	var users models.Usereye
 
 	if err := db.Where("ID = ?", id).Find(&users).Error; err != nil {

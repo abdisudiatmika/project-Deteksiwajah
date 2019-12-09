@@ -10,7 +10,7 @@ import (
 //BasicAuthDB fungsi aut basi databse
 func BasicAuthDB(email, password string, c echo.Context) (bool, error) {
 	var db = config.DB
-	var user models.Face
+	var user models.Personality
 	if err := db.Where("email=? AND password=?", email, password).First(&user).Error; err != nil {
 		return false, nil
 	}
