@@ -1,6 +1,6 @@
 package models
 
-//FaceLandmark struck simpan data wajah
+//Face struck simpan data wajah
 type Face struct {
 	LeftX   int
 	TopY    int

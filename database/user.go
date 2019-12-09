@@ -3,6 +3,7 @@ package database
 import (
 	"project-Deteksiwajah/config"
 	"project-Deteksiwajah/models"
+	"strconv"
 )
 
 var db = config.DB
@@ -25,6 +26,21 @@ func CreateUsereye(usereye *models.Usereye) (interface{}, error) {
 		return nil, err
 	}
 	return usereye, nil
+}
+
+//FindPersonal fungsi mencari data
+func FindPersonal(jarak int) (string, error) {
+	var users models.Usereye
+
+	//jarak = 813
+	//if err := db.Where("jarak = ?", string(jarak)).Find(&users).Error; err != nil {
+	//if err := db.Find(&users, jarak).Error; err != nil {
+	if err := db.Where("jarak LIKE ?", "%"+strconv.Itoa(jarak)+"%").Find(&users).Error; err != nil {
+		return "", err
+	}
+	//fmt.Println(users)
+	return users.Personal, nil
+
 }
 
 //GetUserByID function mengambil data user

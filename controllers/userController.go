@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	"io"
 	"net/http"
+	"os"
 	"project-Deteksiwajah/database"
 	"project-Deteksiwajah/models"
 	"strconv"
@@ -97,4 +99,53 @@ func DeleteUserController(c echo.Context) error {
 		"data":    result,
 	})
 
+}
+
+//FileUpload data
+func FileUpload(c echo.Context) error {
+
+	//Source
+	file, err := c.FormFile("file")
+	if err != nil {
+		return err
+	}
+
+	src, err := file.Open()
+	if err != nil {
+		return err
+	}
+	defer src.Close()
+
+	// Destination
+	dst, err := os.Create("./images/1.jpeg")
+	if err != nil {
+		return err
+	}
+	defer dst.Close()
+
+	// Copy
+	if _, err = io.Copy(dst, src); err != nil {
+		return err
+	}
+
+	return GetFacePersonal(c)
+}
+
+//GetFacePersonal mencari personal
+func GetFacePersonal(c echo.Context) error {
+
+	jarak := Getdataface()
+
+	result, err := database.FindPersonal(jarak)
+
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"code":    http.StatusOK,
+		"status":  true,
+		"massage": "mendapatkan data",
+		"data":    result,
+	})
 }

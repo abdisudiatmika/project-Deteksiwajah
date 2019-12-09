@@ -1,10 +1,16 @@
 package models
 
-//Responface struck simpan data wajah
-type Responface struct {
-	Successful bool
-	Faces      []Face
-
-	// LeftEye   []int    `json:"lefteye"`
-	// RightEyes []string `json:"RightEye"`
+//FaceWithLandmarks struck simpan data wajah
+type FaceWithLandmarks struct {
+	Successful bool `json:"Successful"`
+	Faces      []struct {
+		LeftEye []struct {
+			X int `json:"X"`
+			Y int `json:"Y"`
+		} `json:"LeftEye"`
+		RightEye []struct {
+			X int `json:"X"`
+			Y int `json:"Y"`
+		} `json:"RightEye"`
+	} `json:"Faces"`
 }
