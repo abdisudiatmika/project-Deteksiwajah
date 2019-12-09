@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"project-Deteksiwajah/config"
 	"project-Deteksiwajah/models"
 	"project-Deteksiwajah/routes"
@@ -8,10 +9,10 @@ import (
 
 func main() {
 	e := routes.New()
-
+	port := os.Getenv("PORT")
 	InitialMigration()
 
-	e.Logger.Fatal(e.Start(":8000"))
+	e.Logger.Fatal(e.Start(":" + port))
 }
 
 //InitialMigration migrasi database
