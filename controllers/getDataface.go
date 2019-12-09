@@ -83,9 +83,35 @@ func Getdataface() int {
 	fmt.Println(NewFaceWithLandmarks.Faces[0].LeftEye[0].X)
 
 	fmt.Println(NewFaceWithLandmarks.Faces[0].RightEye[0].X)
-	matakiri := NewFaceWithLandmarks.Faces[0].LeftEye[0].X
+	matakiri := (NewFaceWithLandmarks.Faces[0].LeftEye[0].X)
 	matakanan := (NewFaceWithLandmarks.Faces[0].RightEye[0].X)
 	jarak := matakanan - matakiri
 	fmt.Println(jarak)
 	return jarak
+}
+
+//GetQutes untuk mengambil Qutes
+func GetQutes(kata string) models.Personality {
+	var requestBody bytes.Buffer
+	req, _ := http.NewRequest("GET", "https://quote-garden.herokuapp.com/quotes/search/"+kata, &requestBody)
+
+	//responseData, _ := ioutil.ReadAll(response.Body)
+	//defer response.Body.Close()
+
+	NewQutes := models.Qutes{}
+	client := &http.Client{}
+	response, err := client.Do(req)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	json.NewDecoder(response.Body).Decode(&NewQutes)
+
+	hasil := (NewQutes.Results[0].QuoteText)
+	var personal models.Personality
+	personal.UserPersobality = kata
+	personal.UserQutes = hasil
+	fmt.Println(personal)
+	return personal
+
 }

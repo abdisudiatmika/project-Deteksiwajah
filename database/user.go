@@ -36,6 +36,7 @@ func FindPersonal(jarak int) (string, error) {
 	//if err := db.Where("jarak = ?", string(jarak)).Find(&users).Error; err != nil {
 	//if err := db.Find(&users, jarak).Error; err != nil {
 	if err := db.Where("jarak LIKE ?", "%"+strconv.Itoa(jarak)+"%").Find(&users).Error; err != nil {
+		//if err := db.First(&users).Error; err != nil {
 		return "", err
 	}
 	//fmt.Println(users)

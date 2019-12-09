@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -141,11 +142,12 @@ func GetFacePersonal(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
-
+	fmt.Println(result)
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"code":    http.StatusOK,
 		"status":  true,
 		"massage": "mendapatkan data",
-		"data":    result,
+		"data":    GetQutes(result),
 	})
+
 }
