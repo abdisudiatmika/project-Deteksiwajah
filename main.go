@@ -18,7 +18,7 @@ func main() {
 //InitialMigration migrasi database
 func InitialMigration() {
 	var db = config.DB
-	if !db.HasTable(&models.Usereye{}) {
-		db.AutoMigrate(&models.Usereye{})
-	}
+	//if !db.HasTable(&models.Usereye{}) {
+	db.AutoMigrate(&models.Usereye{})
+	//}
 }
