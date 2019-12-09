@@ -14,6 +14,7 @@ func Geteyedb() (interface{}, error) {
 
 	if err := db.Find(&users).Error; err != nil {
 		return nil, err
+
 	}
 	return users, nil
 }
