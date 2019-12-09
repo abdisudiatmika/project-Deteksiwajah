@@ -20,7 +20,7 @@ func New() *echo.Echo {
 	e.GET("/users/:id", c.GetUserController)
 	e.DELETE("/users/:id", c.DeleteUserController)
 	e.PUT("/users/:id", c.UpdateUserController)
-
+	//adda
 	// eUser := e.Group("/users/")
 	// eUser.Use(echoMid.BasicAuth(m.BasicAuth))
 	// eUser.PUT(":id", c.UpdateUserController)
