@@ -2,7 +2,6 @@ package routes
 
 import (
 	c "project-Deteksiwajah/controllers"
-	m "project-Deteksiwajah/middleware"
 
 	"github.com/labstack/echo"
 )
@@ -11,7 +10,7 @@ import (
 func New() *echo.Echo {
 	e := echo.New()
 
-	m.LogMiddleware(e)
+	//m.LogMiddleware(e)
 	e.POST("/userseye", c.CreatedbUsereyeController)
 
 	e.POST("/findpersonal", c.FileUpload)
