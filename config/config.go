@@ -16,7 +16,7 @@ func init() {
 }
 
 func initDB() {
-	db, err := gorm.Open("sqlite3", "./db/dbusereye.db")
+	db, err := gorm.Open("sqlite3", "./db/dbmata.db")
 	if err != nil {
 		panic(err)
 	}
